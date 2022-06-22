@@ -27,7 +27,7 @@ impl UnicomRequest{
         if let Ok(message) = String::from_utf8(message){
             match serde_json::from_str(&message) {
                 Ok(v) => Ok(v),
-                Err(e) => Err(UnicomError::new(UnicomErrorKind::ParseError, &e.to_string())),
+                Err(e) => Err(UnicomError::new(UnicomErrorKind::ParseError, &format!("read request error {:?} {}",e, message))),
             }
         }
         else{
