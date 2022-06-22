@@ -45,7 +45,7 @@ impl Node{
         Err(UnicomError::new(UnicomErrorKind::NotFound, &format!("Api {} not found", name)))
     }
 
-    pub async fn request(&self, api: &Api, method: MethodKind, parameters: Map<String, Value>, timeout: f32) -> Result<UnicomResponse, UnicomError>{
+    pub async fn request(&self, api: &Api, method: MethodKind, parameters: Map<String, Value>) -> Result<UnicomResponse, UnicomError>{
         api.get_method(&method)?.generate_parameters(&parameters)?;
 
         Ok(self.connector.request(UnicomRequest{
@@ -54,7 +54,7 @@ impl Node{
             method,
             name: String::new(),
             node_name: String::new(),
-        }, timeout).await?)
+        }).await?)
     }
 
     pub async fn response(&self, request_id: u64, data: Vec<u8>) -> Result<(), UnicomError> {
@@ -124,7 +124,7 @@ impl NodeConfig{
 #[async_trait]
 pub trait NodeConnector: Send + Sync{
     async fn init(&self) -> Result<NodeConfig, UnicomError>;
-    async fn request(&self, request: UnicomRequest, timeout: f32) -> Result<UnicomResponse, UnicomError>;
+    async fn request(&self, request: UnicomRequest) -> Result<UnicomResponse, UnicomError>;
     async fn response(&self, request_id: u64, response: UnicomResponse) -> Result<(), UnicomError>;
     async fn error(&self, request_id: u64, error: UnicomError) -> Result<(), UnicomError>;
     async fn next(&self) -> Result<UnicomMessage, UnicomError>;
