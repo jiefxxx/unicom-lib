@@ -75,7 +75,7 @@ impl Into<StatusCode> for UnicomErrorKind{
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct UnicomError{
     kind: UnicomErrorKind,
-    description: String,
+    pub description: String,
 }
 
 impl UnicomError{
