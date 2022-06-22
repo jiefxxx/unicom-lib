@@ -114,6 +114,12 @@ impl From<&str> for MethodKind{
     }
 }
 
+impl From<String> for MethodKind{
+    fn from(m: String) -> Self {
+        m.as_str().into()
+    }
+}
+
 impl From<MethodKind> for &str{
     fn from(m: MethodKind) -> Self {
         match m{
