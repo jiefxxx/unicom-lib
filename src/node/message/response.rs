@@ -2,9 +2,11 @@ use serde_json::Value;
 
 use crate::error::UnicomError;
 
+#[derive(Debug)]
 pub struct UnicomResponse{
     pub data: Vec<u8>,
 }
+
 
 impl UnicomResponse {
     pub fn empty() -> UnicomResponse{
