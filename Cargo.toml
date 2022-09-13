@@ -1,19 +1,20 @@
 [package]
 name = "unicom-lib"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-futures = "0.3.21"
-tokio = { version = "1.17.0", features = ["full"] }
-serde = "1.0.136"
-serde_derive = "1.0.136"
-serde_json = "1.0.79"
-async-trait = "0.1.53"
-regex= "1.5.5"
-tera = "1.15.0"
-hyper = { version = "0.14.18", features = ["full"] }
+futures = "0.3.24"
+tokio = { version = "1.21.1", features = ["full"] }
+serde = "1.0.144"
+serde_derive = "1.0.144"
+serde_json = "1.0.85"
+async-trait = "0.1.57"
+regex= "1.6.0"
+tera = "1.17.0"
+hyper = { version = "0.14.20", features = ["full"] }
 byteorder = "1.4.3"
 toml = "0.5.9"
+walkdir = "2.3.2"
