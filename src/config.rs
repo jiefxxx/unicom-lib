@@ -50,11 +50,11 @@ impl TryInto<NodeConfig> for Manifest{
                 if !entry.file_type().is_file(){
                     continue
                 }
-                let (_, name) = entry.path().to_str().unwrap().split_at(size);
+                let (_, name) = entry.path().to_str().unwrap().split_at(size+1);
                 let terra_path = Path::new(&self.name).join(name);
                 let absolute_path = entry.path().canonicalize().unwrap();
 
-
+                println!("name: {}, terra {:?}", self.name, terra_path);
                 config.add_template(absolute_path.to_str().unwrap(), terra_path.to_str().unwrap());
                 
             }
