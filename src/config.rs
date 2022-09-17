@@ -41,6 +41,7 @@ impl TryInto<NodeConfig> for Manifest{
     fn try_into(self) -> Result<NodeConfig, Self::Error> {
         let mut config = NodeConfig::new(&self.name);
         if self.templates.is_some(){
+            let size = self.templates.as_ref().unwrap().len();
             for entry in WalkDir::new(self.templates.unwrap())
                     .follow_links(true)
                     .into_iter()
@@ -49,11 +50,8 @@ impl TryInto<NodeConfig> for Manifest{
                 if !entry.file_type().is_file(){
                     continue
                 }
-                
-                let mut data :Vec<&str> = entry.path().to_str().unwrap().split("/").collect();
-                data.remove(0);
-
-                let terra_path = Path::new(&self.name).join(data.join("/"));
+                let (_, name) = entry.path().to_str().unwrap().split_at(size);
+                let terra_path = Path::new(&self.name).join(name);
                 let absolute_path = entry.path().canonicalize().unwrap();
 
 
