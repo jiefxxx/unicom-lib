@@ -1,4 +1,4 @@
-use std::{collections::HashMap, path::Path};
+use std::{collections::HashMap, path::{Path, PathBuf}, fs::canonicalize};
 use crate::node::{endpoint::{ApiConfig, EndPointKind}, NodeConfig};
 use walkdir::WalkDir;
 
@@ -70,7 +70,11 @@ impl TryInto<NodeConfig> for Manifest{
                         if endpoint.path.is_none(){
                             return Err(format!("Endpoint path is None {:?}", endpoint))
                         }
-                        EndPointKind::Static{path:endpoint.path.unwrap()}
+                        let path = endpoint.path.unwrap();
+                        let srcdir = PathBuf::from(&path);
+                        let full = canonicalize(&srcdir).expect(&format!("Static file/directory {} Not Found", path));
+                        let full_path = full.to_str().unwrap().to_string();
+                        EndPointKind::Static{path: full_path}
                     },
                     "rest" => {
                         if endpoint.api.is_none(){
