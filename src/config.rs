@@ -9,6 +9,7 @@ pub struct Config {
     pub template_dir: String,
     pub app_dir: String,
     pub session_path: String,
+    pub framwork_path: String,
 }
 
 
