@@ -176,8 +176,8 @@ pub enum UserLevel {
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct User{
-    name: String,
-    level: UserLevel,
+    pub name: String,
+    pub level: UserLevel,
 }
 
 
