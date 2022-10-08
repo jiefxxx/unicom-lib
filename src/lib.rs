@@ -167,4 +167,17 @@ impl ServerConnection{
 
 }
 
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub enum UserLevel {
+    Admin,
+    Root,
+    Normal,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct User{
+    name: String,
+    level: UserLevel,
+}
+
 
