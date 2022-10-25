@@ -180,4 +180,9 @@ pub struct User{
     pub level: UserLevel,
 }
 
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct InputFile{
+    pub path: String
+}
+
 
