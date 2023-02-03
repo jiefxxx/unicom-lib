@@ -133,6 +133,18 @@ impl From<toml::de::Error> for UnicomError{
     }
 }
 
+impl From<ffprobe::FfProbeError> for UnicomError{
+    fn from(e: ffprobe::FfProbeError) -> Self {
+        UnicomError { kind: UnicomErrorKind::ParseError, description:  format!("ERROR ffprobe {:?}", e)}
+    }
+}
+
+impl From<rusqlite::Error> for UnicomError{
+    fn from(e: rusqlite::Error) -> Self {
+        UnicomError { kind: UnicomErrorKind::DataInvalid, description:  format!("ERROR sqlite {:?}", e)}
+    }
+}
+
 impl Into<Response<Body>> for UnicomError{
     fn into(self) -> Response<Body> {
         let status: StatusCode = self.kind.into();

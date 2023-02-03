@@ -18,3 +18,5 @@ hyper = { version = "0.14.20", features = ["full"] }
 byteorder = "1.4.3"
 toml = "0.5.9"
 walkdir = "2.3.2"
+ffprobe = "0.3.3"
+rusqlite = "0.28.0"
